@@ -1,0 +1,993 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb, amsthm}
+
+\usepackage{biblatex}
+\addbibresource{sample.bib}
+\usepackage{csquotes}
+
+\usepackage[margin=1in]{geometry}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ch}[2]{\left[\begin{array}{c}#1\\ #2 \end{array}\right]}
+\newcommand{\de}{\delta}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\br}[1]{\left(#1\right)}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=teal,filecolor=magenta,urlcolor=cyan}
+
+\setcounter{MaxMatrixCols}{20}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{document}
+
+%%
+%% Title page
+%%
+
+\begin{center}
+{\scshape Federal State Autonomous Educational Institution\\
+for the Higher Education\\
+National Research University ``Higher School of Economics''\\[1ex]
+Faculty of Mathematics\par}
+
+\par\vfill
+
+\textbf{\large Minasian Levon Lermentovich}
+
+\vspace{1.5cm}
+
+{\Large\bfseries
+On Certain Lattice Theta Series
+\par}
+
+\vspace{1.5cm}
+
+\textbf{\large Bachelor's thesis}
+
+\vspace{1cm}
+
+Field of study: 01.03.01 --- Mathematics,\\[1ex]
+Degree programme: bachelor's educational programme ``Mathematics''
+\par\vfill
+\noindent\parbox[t]{0.48\textwidth}{%
+Reviewer:\\[3pt]
+Doctor of Sciences,\\
+Aleksey Vasilyevich Sleptsov
+}\hspace{0.04\textwidth}\parbox[t]{0.48\textwidth}{%
+Scientific supervisor:\\[3pt]
+Candidate of Sciences,\\
+Petr Igorevich Dunin-Barkowski\\[2ex]
+%% Uncomment if needed
+%Advisor:\\[3pt]
+%Doctor of Sciences, professor\\
+%Nikolay Nikiforovich Nikolaev
+}%
+\par\vfill\vfill
+Moscow 2024
+\end{center}
+\thispagestyle{empty}
+\pagebreak
+%%
+%% ===========================================================================
+%%
+
+\begin{abstract}
+    This work partially establishes the connection between polynomials of Riemann theta constants
+    and lattice theta series of 24-dimensional unimodular lattices. 
+    Both the polynomials of Riemann theta constants and lattice theta series of 16-dimensional
+    unimodular lattices were used as modular forms of weight-8 in the 
+    modular form approach in construction of superstring measures.
+    It was shown that in case for 16-dimensional unimodular lattices
+    there are very elegant relations
+    between the two.
+    We aimed to generalize the question for 24-dimensional unimodular lattices and were able 
+    to partially answer it.
+\end{abstract}
+
+\section{Introduction}
+In this work we study the relation between 2 different ways of expressing certain modular forms:
+via polynomials of Riemann theta constants and via lattice theta series.
+The motivation of studying these specific modular forms comes from physics.
+The problem of finding NSR superstring measures is a long-standing problem in superstring theory.
+One of the approaches is to guess the answer based on known mathematical requirements
+it should satisfy.
+In case of low genera the problem can be reformulated in the terms of modular forms:
+one needs to construct the weight-8 modular forms of certain properties.
+We consider 2 different ways of constructing these modular forms:
+\begin{itemize}
+    \item via polynomials of degree-16 in Riemann theta-constants (so-called Grushevsky ansatz \cite{grushevsky})
+    \item  via lattice theta series of 16-dimensional unimodular lattices (so-called OPSMY ansatz \cite{opsmy})
+\end{itemize}
+It turned out \cite{dunin-barkowski} that there is a very natural connection between the two.
+The question arises: what could be said about the analogous constructions for weights other than 8?
+
+In this work we try to address this question. We consider the weight-12 modular forms
+constructed similarly to original weight-8 Grushevsky functions
+(we refer to these new weight-12 expressions as \emph{weight-12 Grushevsky functions})
+and lattice theta series correponding to 24-dimensional unimodular lattices.
+
+We were able to partially solve this problem: we have identified the underlying lattice 
+for 3 out of 4 polynomials among weight-12 Grushevsky functions.
+One of these answers is rather trivial, the second one easily follows from known results,
+and the third one is nontrivial, was not considered in literature before, and is 
+the main result of this work.
+
+We start by providing all the necessary definitions for 
+modular forms (section \ref{sec:modular-forms}), 
+Riemann theta constants (section \ref{sec:riemann-theta-constants}),
+and lattice theta series (section \ref{sec:lattice-theta-series}).
+Then, in section \ref{sec:main}, we formulate the known result in case of 16-dimensional lattices
+and proceed by proving our own results in the case of 24-dimensional lattices.
+
+\section{Modular forms}\label{sec:modular-forms}
+
+We begin with definitions of modular forms, modular group $\Gamma^{(g)}$ and 
+its important subgroup $\Gamma^{(g)}(1, 2)$.
+Both Grushevsky ansatz and OPSMY ansatz are interesting
+exactly because of their modular properties.
+\begin{definition}[Modular group]
+    Modular group $\Gamma^{(g)}=\text{Sp}(2g, \ZZ)$ is defined as
+    \begin{align}
+        \Gamma^{(g)}=\text{Sp}(2g, \ZZ) = \{ 
+            M \in \ZZ^{2g \times 2g} : 
+            M^t \Omega M = \Omega
+        \}
+    \end{align}
+    where $\Omega$ is defined to be
+    \begin{align}
+    \Omega = 
+    \begin{bmatrix}
+        0 & I_g \\
+        -I_g & 0
+    \end{bmatrix}
+    \end{align}
+\end{definition}
+
+\begin{definition}[Siegel half-space]    
+    Siegel half-space $\mathcal{H}^{(g)}$ is defined to be the set of all symmetric $\CC^{g\times g}$
+    matrices with positive definite imaginary part.
+\end{definition}
+
+\begin{definition}[Action of $\Gamma^{(g)}$]
+    Modular group $\Gamma^{(g)}=\text{Sp}(2g, \ZZ)$ acts on Siegel half-space $\mathcal{H}^{(g)}$
+    the following way:
+    \begin{align}
+        \gamma &= \begin{bmatrix}A & B \\ C & D\end{bmatrix} \in \Gamma^{(g)} \\
+        \gamma: \tau &\mapsto (A\tau + B)(C\tau + D)^{-1}
+    \end{align}
+\end{definition}
+\begin{definition}[Modular form]
+    A holomorphic function $f$ on $\mathcal{H}^{(g)}$ is called a modular form 
+    of weight $k$ with respect to subgroup $\Gamma' \le \Gamma^{(g)}$ if
+    \begin{align}
+        \forall \gamma \in \Gamma' \quad f(\gamma \tau) = \det (C\tau + D)^k f(\tau)
+    \end{align}
+\end{definition}
+
+\begin{definition}[$\Gamma^{(g)}(1,2)$]
+    The subgroup $\Gamma^{(g)}(1,2)$ consists of all the elements 
+    \begin{align}
+        \gamma &= \begin{bmatrix}A & B \\ C & D\end{bmatrix} \in \Gamma^{(g)}
+    \end{align}
+    of the modular group $\Gamma^{(g)}$ s.t. all the diagonal elements 
+    of $AB^t$ and $CD^t$ are even.
+\end{definition}
+
+\section{Riemann theta constants} \label{sec:riemann-theta-constants}
+Now we are going to define 
+the notion of Riemann theta constants: the basic blocks of Grushevsky functions.
+Then we define the set of functions, linear combinations of which form the Grushevsky ansatz for 
+superstring measures: weight-8 Grushevsky functions.
+At the end of this section we define the generalized construction: 
+weight-12 Grushevsky functions.
+\begin{definition}[Riemann theta constant with characteristic]
+    The Riemann theta constant with characteristic $e=\ch {{\vec{\de}}}{{\vec{\ep}}}$ 
+    is the function on Siegel half-space $\mathcal{H}^{(g)}$ defined as
+    \begin{align}\label{eq:riemann-theta-const}
+        \theta_e(\tau)=
+        \theta \ch{{\vec{\de}}}{{\vec{\ep}}} (\tau) =
+        \sum_{\vec n \in \mathbb{Z}^g} 
+            \exp {
+                \Big(
+                    \pi \big(\vec n + \frac{{\vec{\de}}}{2}\big)^t \tau \big(\vec n + \frac{{\vec{\de}}}{2}\big) + 
+                    \pi i \big(\vec n + \frac{{\vec{\de}}}{2}\big)^t {\vec{\ep}}
+                \Big)
+            }
+    \end{align}
+    where ${\vec{\de}}, {\vec{\ep}}$ are binary vectors of length $g$ (i.e. $\in \ZZ_2^g$).
+\end{definition}
+
+Although those are called "constants", they are functions of an argument 
+$\tau \in \mathcal{H}^{(g)}$. 
+Usually theta function is considered to have 2 arguments: $\theta=\theta(z, \theta)$. And
+when we substitute $z=0$ we get a function of 1 argument defined in \eqref{eq:riemann-theta-const}.
+
+
+\begin{definition}[$\Gamma_e$]
+    For characteristic $e=\ch{{\vec{\de}}}{{\vec{\ep}}}$ we define the subgroup $\Gamma_e \leq \Gamma^{(g)}$ as 
+    \begin{align}
+        \Gamma_e = \gamma[e] \Gamma_g(1, 2) \gamma[e]^{-1}
+    \end{align}
+    where $\gamma[e]$ is an element of $\Gamma^{(g)}$ which maps the Riemann theta constant 
+    with zero characteristic to characteristic $e$.
+\end{definition}
+
+\begin{theorem}[\cite{mumford-theta}]\label{thm:theta-modularity}
+    For every $\gamma \in \Gamma(1, 2)$
+        \begin{align}
+            \theta\ch{D{\vec{\de}}-C{\vec{\ep}}}{-B{\vec{\de}}+A{\vec{\ep}}}\br{\gamma\tau} = 
+            \zeta_{\gamma} \det\br{C\tau+D}^{1/2}
+            \exp\br{\frac{\pi i}{4}\br{{2{\vec{\de}}^t B^tC{\vec{\ep}}-{\vec{\de}}^t
+            B^tD{\vec{\de}}-{\vec{\ep}}^t A^tC{\vec{\ep}}}}}
+            \theta\ch{{\vec{\de}}}{{\vec{\ep}}}\br{\tau}
+        \end{align}
+    where $\zeta_\gamma$ is the eighth root of unity $\zeta_\gamma^8=1$ depending only on $\gamma$.
+\end{theorem}
+
+It is straightforward to see that by theorem \ref{thm:theta-modularity} 
+Riemann theta constant $\theta_0^{16}$ is a weight-8 modular form w.r.t. $\Gamma(1,2)$.
+More generally, Riemann theta constant $\theta_0^{8k}$ is a 
+weight-$4k$ modular form w.r.t. $\Gamma(1,2)$ by same reasoning.
+
+\begin{definition}[Even/odd characteristic]
+    The characteristic $\ch {{\vec{\de}}}{{\vec{\ep}}}$ is called even if ${\vec{\de}} \cdot {\vec{\ep}}$ is even. 
+    Otherwise, the characteristic is called odd.
+\end{definition}
+
+An interesting fact is that Riemann theta constants with odd characteristic are zero.
+\begin{lemma}[\cite{mumford-theta}]
+    $e \in \ZZ_2^g$ is odd. Then $\theta_e (\tau) \equiv 0$.
+\end{lemma}
+
+\begin{definition}[Original weight-8 Grushevsky functions]
+    \begin{align}
+        \xi_0^{8, (g)}[e] &= \theta^{16}_e \\
+        \xi_1^{8, (g)}[e] &= \theta^{8}_e \sum_{e_1}^{N_e} \theta^8_{e+e_1} \\
+        \xi_2^{8, (g)}[e] &= \theta^{4}_e \sum_{e_1}^{N_e} \theta^4_{e+e_1}\theta^4_{e+e_2}\theta^4_{e+e_1+e_2} \\
+        ... \nonumber \\
+        \xi_p^{8, (g)}[e] &= \sum_{e_1, ..., e_p}^{N_e} \Bigg \{
+            \theta_e 
+            \cdot \Big( \prod_i^p \theta_{e + e_i} \Big)
+            \cdot \Big( \prod_{i < j}^p \theta_{e + e_i + e_j} \Big)
+            % \cdot \Big( \prod_{i < j < k}^p \theta_{e + e_i + e_j + e_k} \Big)
+            \cdot ...
+            \cdot \theta_{e + e_1 + ... + e_p}
+        \Bigg \} ^ {2^{4 - p}}
+    \end{align}
+    where $p=0..4$.
+\end{definition}
+Grushevsky ansatz in genus $g$ for superstring measures is defined as the linear combinations 
+    of these weight-8 Grushevsky functions.
+    We will not provide the coefficients here, because they are not important for this work.
+
+By summing up the $\theta_e$ for different characteristics $e$ 
+we obtain modular form w.r.t. somewhat large subgroup of $\Gamma^{(g)}$ 
+(more precisely, w.r.t. subgroup $\Gamma_e$).
+
+\begin{theorem}[\cite{morozov}]\label{thm:xi-8-are-modular}
+    $\xi_{p}^{8, (g)}[e]$
+    are weight-8 modular forms w.r.t. subgroup $\Gamma_e$.
+\end{theorem}
+
+Grushevsky functions are constructed as polynomials of Riemann theta constants, 
+thus keeping the total polynomial degree divisible by 8 kills $\zeta_\gamma$.
+This is why we want to increase the polynomial degree to 24 after 18: 
+to keep the modularity property.
+Another view on this move will be covered in section \ref{sec:lattice-theta-series} when we discover
+the similar modularity property of lattice theta series.
+
+Now, we can introduce the following definition:
+
+\begin{definition}[Weight-12 Grushevsky functions]
+    \begin{align}
+        \xi_0^{12, (g)}[e] &= \theta^{24}_e \\
+        \xi_1^{12, (g)}[e] &= \theta^{12}_e \sum_{e_1}^{N_e} \theta^{12}_{e+e_1} \\
+        ... \nonumber \\
+        \xi_p^{12, (g)}[e] &= \sum_{e_1, ..., e_p}^{N_e} \Bigg \{
+            \theta_e 
+            \cdot \Big( \prod_i^p \theta_{e + e_i} \Big)
+            \cdot \Big( \prod_{i < j}^p \theta_{e + e_i + e_j} \Big) \cdot ...
+            \cdot \theta_{e + e_1 + ... + e_p}
+        \Bigg \} ^ {3 \cdot 2^{3 - p}}
+    \end{align}
+    where $p=0..3$.
+\end{definition}
+
+Grushevsky did not define or study weight-12 Grushevsky functions 
+(because there is probably no 
+application of them in superstring theory). They are original to the present work.
+We have selected this naming to reflect that the construction originates from Grushevsky ansatz for
+superstring measures.
+We consider those Grushevsky functions purely as mathematical objects
+and keep this naming throughout the article.
+
+\begin{theorem}
+    $\xi_{p}^{12, (g)}$ are weight-12 modular forms w.r.t. subgroup $\Gamma_e$.
+\end{theorem}
+\begin{proof}
+    The proof is analogous to the proof of referenced theorem \ref{thm:xi-8-are-modular}.
+\end{proof}
+
+\section{Lattice theta series}\label{sec:lattice-theta-series}
+In this section we will introduce the definition of lattice and the associated lattice theta series.
+Also we will talk about the gluing theory, which allows classification
+of lattices with fixed dimension.
+\begin{definition}[Lattice]
+    The set generated by all the integer linear combinations of a basis 
+    $v_1, .., v_n \in \RR^n$ is called the lattice (generated by $v_1, .., v_n$).
+    The number $n$ is called the dimension of the lattice.
+\end{definition}
+
+\begin{definition}[Dual lattice]
+    Dual lattice $\Lambda^*$ for lattice $\Lambda \subset \RR^h$ 
+    is the set of all vectors $u \in \RR^h$ s.t. 
+    $\forall v \in \Lambda \quad u \cdot v \in \ZZ$.
+\end{definition}
+
+\begin{definition}[Unimodular lattice]
+    Lattice $\Lambda$ is called self-dual or unimodular if it coincides with it's dual $\Lambda^*$. 
+    An equivalent definition is that the Gram matrix $MM^t$ (where $M$ is the matrix formed with 
+    the basis of $\Lambda$ as columns) has determinant 1.
+\end{definition}
+
+
+\begin{definition}[Lattice theta series]
+    The genus-$g$ lattice theta series associated with the lattice $\Lambda \subset \RR^h$ is 
+    a function on the Siegel space $\mathcal{H}^{(g)}$ defined as
+    \begin{align}
+        \vartheta^{(g)}_{\Lambda}(\tau) = 
+        \sum_{(\vec p_1, ..., \vec p_g) \in \Lambda^g}
+            \exp \Big(
+                \pi i \sum_{k, l}({\vec{p_k}} \cdot {\vec{p_l}}) \tau_{kl}
+            \Big)
+    \end{align}
+\end{definition}
+
+\begin{lemma}[\cite{opsmy}]
+    If 8 divides the number of dimensions $m$ of a unimodular lattice
+    $\Lambda$, then the corresponding theta series $\vartheta^{(g)}_{\Lambda}$ for this lattice is a modular form of weight m/2 relative to $\Gamma^{(g)}(1,2)$.
+\end{lemma}
+
+This lemma shows us that if we want to match against the generalized Grushevsky construction,
+which will consist of modular forms similarly to the original one,
+then we should consider the lattice theta series of $m$-dimensional lattices where $m=8k$.
+
+So the next step after the original $m=16$ is the $m=24$. And this gives another idea
+on why the generalized Grushevksy construction should contain weight-12 modular forms.
+
+\begin{theorem}[\cite{conway}, Gluing theory]\label{thm:gluing-theory}
+    Suppose $L \subset \RR^n$ is an integer lattice containing a sublattice
+    \begin{align}
+        L_1 \oplus L_2 \oplus .. \oplus L_k \\
+        \sum_i^k d_i=n
+    \end{align}
+    where every $L_i$ is also an integer lattice and $d_i$ is the dimension of $L_i$.
+    Then $L$ is generated by $L_1 \oplus L_2 \oplus .. \oplus L_k$
+    and some vectors $y^j, j=1..J$ of form
+    \begin{align}
+        y^j=y^j_1 + y^j_2 + .. + y^j_k
+    \end{align}
+    where each $y^j_i \in \RR^n$ is from $L_i^* \subset \RR^n$.
+    Vectors $y^j=y^j_1+ ..+ y^j_n$ are called \emph{gluing vectors}.
+    
+    We will denote $L=\langle L_1 \oplus .. \oplus L_k, y^1, .., y^J \rangle$.
+\end{theorem}
+
+\begin{definition}[$A_n$ lattice]
+    \begin{align}
+        A_n = \{
+            (x_1, .., x_{n+1}) \in \ZZ^{n+1}:
+            \sum_i x_i = 0
+        \}
+    \end{align}
+\end{definition}
+
+\begin{definition}[$D_n, D_n^+$ lattices]
+    \begin{align}
+        D_n = \{
+            (x_1, .., x_{n}) \in \ZZ^{n}:
+            \sum_i x_i \quad \text{is even}
+        \}
+    \end{align}
+    There is also another important lattice, $D_n^+$, which is defined only for even $n$:
+    \begin{align}
+        D_n^+ = D_n \cup \br{D_n + \br{\frac{1}{2}^n}}
+    \end{align}
+    Here and throughout the article 
+    we use the notation $\br{a^n}$ to denote the vector $\br{a, a, .., a} \in \RR^n$.
+\end{definition}
+
+\begin{definition}[$E_7, E_8$ lattices]
+    $E_8$ is another name for the lattice $D_8^+$. 
+    And the lattice $E_7$ is defined as the sublattice of $E_8$ orthogonal to the 
+    fixed minimal vector $v \in E_8$:
+    \begin{align}
+        E_7 = \{
+            x \in E_8: x \cdot v = 0
+        \}
+    \end{align}
+    (minimal vector of a lattice is any vector with smallest non-zero norm).
+\end{definition}
+
+\begin{theorem}\cite{conway}
+    There are 8 16-dimensional unimodular lattices
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Lattice theta series & Lattice & Gluing vector \\
+        \hline
+        $\vartheta_0$ & $\ZZ^{16}$ & -\\
+        \hline
+        $\vartheta_1$ & $\ZZ^8 \oplus E_8$ & -\\
+        \hline
+        $\vartheta_2$ & $\br{\ZZ^4 \oplus D_{12}}^+$ & $\Big( 0^4, \frac{1}{2}^{12} \Big)$ \\
+        \hline
+        $\vartheta_3$ & $\br{\ZZ^2 \oplus E_7 \oplus E_7}^+$ & 
+            $\Big( \frac{1}{4}^6, -\frac{3}{4}^2, \frac{1}{4}^6, -\frac{3}{4}^2 \Big)$ \\
+        \hline
+        $\vartheta_4$ & $\br{\ZZ \oplus A_{15}}^+$ & 
+            $\Big( \frac{1}{4}^{12}, -\frac{3}{4}^4 \Big), 
+            \Big( \frac{1}{2}^8, -\frac{1}{2}^8 \Big),
+            \Big( \frac{3}{4}^4, -\frac{1}{4}^{12} \Big)$
+            \\
+        \hline
+        $\vartheta_5$ & $D_8 \oplus D_8$ & 
+            $\Big( \frac{1}{2}^8, 0^7, 1 \Big)$
+            \\
+        \hline
+        $\vartheta_6$ & $E_8 \oplus E_8$ & - \\
+        \hline
+        $\vartheta_7$ & $D_{16}^+$ & $\Big( \frac{1}{2}^{16} \Big)$ \\
+        \hline
+    \end{tabular}
+\end{center}
+For every lattice $\Lambda$ in 2-nd column the $\Lambda^+$ means the glued lattice 
+in the sense of theorem \ref{thm:gluing-theory}. 
+\end{theorem}
+
+    OPSMY ansatz for superstring measures is defined as the linear combinations 
+    of these lattice theta series.
+
+
+\section{Weight-12 Grushevsky functions vs 24-dimensional lattice theta series}\label{sec:main}
+We start by recalling the known result for weight-8 modular forms. Then we consider
+our own case of weight-12 modular forms and 
+formulate and prove the main results of this work: theorems \ref{thm:p-2} and \ref{thm:classification-of-lambda}.
+\begin{theorem}[\cite*{dunin-barkowski}]
+    In every genus $g$ there is an explicit connection between 
+    weight-8 Grushevsky functions and lattice theta series  of unimodular 16-dimensional lattices, namely:
+    \begin{align}
+        \forall g \in\mathbb{Z}_{\geq 0} \quad \vartheta^{(g)}_p = 2^{-gp}\xi_p^{8, (g)}, \quad p=0..4
+    \end{align}
+\end{theorem}
+    
+    After the discussed theorem for $m=16$, the next question is
+    what lattices in dimension $m=24$ correspond to the polynomials of
+    Riemann theta constants given by our generalization: weight-12 Grushevsky functions. 
+    Let's recall it:
+    \begin{align}
+        \xi_0^{12, (g)}[e] &= \theta^{24}_e \nonumber \\
+        \xi_1^{12, (g)}[e] &= \theta^{12}_e \sum_{e_1}^{N_e} \theta^{12}_{e+e_1} \nonumber \\
+        ... \nonumber \\
+        \xi_p^{12, (g)}[e] &= \sum_{e_1, ..., e_p}^{N_e} \Bigg \{
+            \theta_e 
+            \cdot \Big( \prod_i^p \theta_{e + e_i} \Big)
+            \cdot \Big( \prod_{i < j}^p \theta_{e + e_i + e_j} \Big) \cdot ...
+            \cdot \theta_{e + e_1 + ... + e_p}
+        \Bigg \} ^ {3 \cdot 2^{3 - p}} \nonumber
+    \end{align}
+
+    Clearly $p=0..3$, so we have to deal with 4 polynomials.
+
+    The case $p=0$ is a trivial one and is proved in \cite{conway}.
+    \begin{theorem}[\cite{conway}, $p=0$]
+        \begin{align}
+            \forall g \in\mathbb{Z}_{\geq 0} \quad \xi^{12, (g)}_0=\vartheta^{(g)}_{\ZZ^{24}}
+        \end{align}
+    \end{theorem}
+
+    The case $p=1$ is also known, but we provide the proof to demonstrate the approach
+    we follow for $p=2$.
+
+    \begin{theorem}[$p=1$]
+        \begin{align}
+            \forall g \in\mathbb{Z}_{\geq 0} \quad \xi_1^{12, (g)}[0] = 2^{-g} \cdot \vartheta^{(g)}_{\ZZ^{12} \oplus D_{12}^+}
+        \end{align}
+    \end{theorem}
+    \begin{proof}
+        \begin{align}
+            \frac{\xi_1^{12, (g)}[0]}{\theta_0^{12}} = \sum_{e} \theta_e^{12}
+            &= \sum_{e} \Big(\sum_{\vec{n} \in \ZZ^g}
+                \exp \big[ \pi i 
+                    (\vec{n} + \frac{\vec{\de}}{2})^t \tau (\vec{n} + \frac{{\vec{\de}}}{2}))
+                    + (\vec{n} + \frac{\vec{\de}}{2})^t {\vec{\ep}}
+                \big]
+            \Big)^{12} \nonumber \\
+            &= \sum_e \sum_{\substack{\vec{n}^a \in \ZZ^g \\ a=1..12}}
+                \exp \big[
+                    \pi i \Big(
+                        (\sum_{a=1}^{12} \vec{n}^a + \frac{{\vec{\de}}}{2})^t \tau 
+                        (\sum_{a=1}^{12} \vec{n}^a + \frac{{\vec{\de}}}{2})
+                        + 
+                        (\sum_{a=1}^{12} \vec{n}^a + \frac{{\vec{\de}}}{2})^t {\vec{\ep}}
+                    \Big)
+                \big] \nonumber \\
+            &= \sum_e \sum_{\substack{\vec{n}^a \in \ZZ^g \\ a=1..12}}
+                \exp \big[
+                    \pi i \Big(
+                        (\sum_{a=1}^{12} \vec{n}^a + \frac{{\vec{\de}}}{2})^t \tau 
+                        (\sum_{a=1}^{12} \vec{n}^a + \frac{{\vec{\de}}}{2})
+                        + 
+                        (\sum_{a=1}^{12} \vec{n}^a)^t {\vec{\ep}}
+                    \Big)
+                \big]
+        \end{align}
+        If any component of the vector $\sum_{a} \vec n^a$ is odd, then 
+        there exist $2^{g-1}$ vectors ${\vec{\ep}} \in \ZZ^g$ where
+        this component is equal to 1 and the same number of vectors where 
+        this component is equal to 0.
+        Every such pair of vectors ${\vec{\ep}}$ creates different in sign, 
+        but equal in absolute value terms $\big(\exp(\pi i(..))\big)$ which 
+        cancel out each other. So, we consider only vectors $\vec n^a$ s.t.
+        the components of the vector $\sum_a \vec n^a$ are even. 
+        The term $(\sum_a \vec n^a)^t {\vec{\ep}}$ is therefore always even and thus the 
+        $\exp[..]$ does not depend on it since $2\pi i$-periodicity of $\exp$. So the 
+        sum over all ${\vec{\ep}}$ (we had the sum over $e=\ch{{\vec{\de}}}{{\vec{\ep}}}$)
+        is replaced by the multiplier $2^g$.
+
+        After dividing by $2^g$ we get the following series:
+        \begin{align}\label{al:alt-lambda-2}
+            \sum_{{\vec{\de}} \in \ZZ_2^g} \sum_{\substack{\vec n^a \in \ZZ^g \\ a=1..12 \\ \sum_{a=1}^{12} \vec n^a \vdots 2}}
+                \exp \Big(
+                    \pi i \sum_{a=1}^{12}
+                        (\vec n^a + \frac{{\vec{\de}}}{2})^t \tau
+                        (\vec n^a + \frac{{\vec{\de}}}{2})
+                \Big)
+        \end{align}
+        And it is easy to see now that the lattice theta series associated with lattice
+        \begin{align}
+            \Lambda_1 \cup \Big(\Lambda_1 + \big(\frac{1}{2}^{12}\big)\Big)
+        \end{align}
+        where 
+        \begin{align}
+            \Lambda_1 = \{ 
+                (n^1, n^2, .., n^{12}) \in \ZZ^{12} |
+                \sum_a n^a \vdots 2
+            \}
+        \end{align}
+        coincides with the one given in \eqref{al:alt-lambda-2}.
+        By definition the lattice $\Lambda_1 \cup \big(\Lambda_1+\big(\frac{1}{2}^{12}\big)\big)$
+        is exactly the lattice $D_{12}^+$.
+    \end{proof}
+
+    The following result for $p=2$ is the main result of this work
+    (alongside with theorem \ref{thm:classification-of-lambda}).
+    \begin{theorem}[$p=2$]\label{thm:p-2}
+        \begin{align}
+            \forall g \in\mathbb{Z}_{\geq 0} \quad \xi_2^{12, (g)}[0] &= 2^{-2g} \cdot \vartheta^{(g)}_{\ZZ^6 \oplus \Lambda^+}
+        \end{align}
+        $\Lambda^+$ is the lattice obtained from $D_6^3=D_6\oplus D_6 \oplus D_6$
+        by gluing it with
+        \begin{align}
+            \vec{\alpha} &= \Big(\frac{1}{2}^6, 0^6, \frac{1}{2}^6 \Big) \\
+            \vec{\beta} &= \Big(0^6, \frac{1}{2}^6, \frac{1}{2}^6 \Big) \\
+            {\vec{\de}} &= ( 1, 0^5, 1, 0^5, 1, 0^5 )
+        \end{align}
+    \end{theorem}
+    Proof of the theorem will be separated into 4 lemmas.
+    \begin{lemma}
+        Lattice corresponding to the theta series
+        \begin{align}
+            2^{2g} \cdot \frac{\xi_2^{12, (g)}[0]}{\theta_0^6}
+        \end{align}
+        is
+        the lattice $\Lambda^+$:
+        \begin{align}
+            \Lambda^+ = 
+            \Lambda \cup (\Lambda + \vec{\alpha}) \cup (\Lambda + \vec{\beta}) \cup (\Lambda + \vec{\gamma})
+        \end{align}
+        where 
+        \begin{align}
+            \vec{\alpha}=\big(\frac{1}{2}^6, 0^6, \frac{1}{2}^6 \big) \\
+            \vec{\beta}=\big(0^6, \frac{1}{2}^6, \frac{1}{2}^6\big) \\
+            \vec{\gamma}=\big(\frac{1}{2}^6, \frac{1}{2}^6, 0^6\big)
+        \end{align}.
+    \end{lemma}
+    \begin{proof}
+        \begin{align}
+            \frac{\xi_2^{12, (g)}[0]}{\theta_0^6} = 
+                \sum_{e_1, e_2} \theta^6_{e_1} \theta^6_{e_2} \theta^6_{e_1+e_2}
+        \end{align}
+        Now, let $e_i = \ch{{\vec{\de}}_i}{{\vec{\ep}}_i}, i=1,2$ and consider
+        \begin{align}
+            \theta^6_{e_1} 
+            &= \Big( \sum_{\vec{n}_1 \in \ZZ^g} \exp \big[ \pi i \big( 
+                (\vec{n}_1 + \frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1 + \frac{{\vec{\de}}_1}{2}) + 
+                (\vec{n}_1 + \frac{{\vec{\de}}_1}{2})^t {\vec{\ep}}_1
+                \big)
+            \big] \Big)^6 \\
+            &= \sum_{\vec{n}_1^1 \in \ZZ^g} (..) \cdot 
+                \sum_{\vec{n}_1^2 \in \ZZ^g} (..) \cdot .. \cdot 
+                \sum_{\vec{n}_1^6 \in \ZZ^g} (..) \\
+            &= \sum_{\vec{n}_1^1 \in \ZZ^g}
+                \sum_{\vec{n}_1^2 \in \ZZ^g} ..
+                \sum_{\vec{n}_1^6 \in \ZZ^g} 
+                \exp \big[ \pi i \big( 
+                \sum_{a=1}^6 (\vec{n}_1^a + \frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1^a + \frac{{\vec{\de}}_1}{2}) + 
+                \sum_{a=1}^6 (\vec{n}_1^a + \frac{{\vec{\de}}_1}{2})^t {\vec{\ep}}_1
+                \big) \big]
+        \end{align}
+        The term $\sum_{a=1}^6(\vec{n}_1^a+\frac{{\vec{\de}}_1}{2})^t {\vec{\ep}}_1$ splits on 
+        $(\sum_{a=1}^6 \vec{n}_1^a)^t {\vec{\ep}}_1$ and 
+        $6 \cdot \frac{{\vec{\de}}_1^t}{2} {\vec{\ep}}_1=3 {\vec{\de}}_1^t {\vec{\ep}}_1$.
+        Since the $2\pi i$-periodicity of $\exp$, the latter is equivalent to ${\vec{\de}}_1^t{\vec{\ep}}_1$.
+        The same holds for $\theta_{e_2}$ and $\theta_{e_1+e_2}$.
+        Now
+        \begin{align}
+            \sum_{e_1, e_2} \theta^6_{e_1} \theta^6_{e_2} \theta^6_{e_1+e_2}
+            &= \sum_{e_1, e_2} 
+            \sum_{\substack{\vec{n}_1^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_2^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_{12}^a \in \ZZ^g \\ a=1..6}}
+            \exp \Big [ \pi i \Big (
+                \sum_{a=1}^6 (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2}) \nonumber \\
+                &+ \sum_{a=1}^6 (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2}) + 
+                \sum_{a=1}^6 (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})^t \tau (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2}) \nonumber \\
+                &+ (\sum_{a=1}^6 \vec{n}_1^a)^t {\vec{\ep}}_1 + 
+                (\sum_{a=1}^6 \vec{n}_2^a)^t {\vec{\ep}}_2 +
+                (\sum_{a=1}^6 \vec{n}_{12}^a)^t ({\vec{\ep}}_1 + {\vec{\ep}}_2) \nonumber \\
+                &+ {\vec{\de}}_1^t {\vec{\ep}}_1 + {\vec{\de}}_2^t {\vec{\ep}}_2 + 
+                ({\vec{\de}}_1 + {\vec{\de}}_2)^t ({\vec{\ep}}_1 + {\vec{\ep}}_2)
+            \Big) \Big]
+        \end{align}
+        If $e$ is odd characteristic, then the corresponding 
+        Riemann theta constant $\theta_e$ is zero.
+        So, we can assume that ${\vec{\de}}_1^t {\vec{\ep}}_1$, ${\vec{\de}}_2^t {\vec{\ep}}_2$, and
+        $({\vec{\de}}_1 + {\vec{\de}}_2)^t ({\vec{\ep}}_1 + {\vec{\ep}}_2)$ are even (otherwise the whole term
+        $\exp(..)$ is zero).
+        Again, since the $2\pi i$-periodicity of $\exp$, we can neglect them:
+
+        \begin{align}
+            \sum_{e_1, e_2} \theta^6_{e_1} \theta^6_{e_2} \theta^6_{e_1+e_2}
+            &= \sum_{e_1, e_2} 
+            \sum_{\substack{\vec{n}_1^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_2^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_{12}^a \in \ZZ^g \\ a=1..6}}
+            \exp \Big [ \pi i \Big (
+                \sum_{a=1}^6 (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2}) \nonumber \\
+                &+ \sum_{a=1}^6 (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2}) + 
+                \sum_{a=1}^6 (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})^t \tau (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2}) \nonumber \\
+                &+ (\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a)^t {\vec{\ep}}_1 + 
+                (\sum_{a=1}^6 \vec{n}_2^a + \vec{n}_{12}^a)^t {\vec{\ep}}_2
+            \Big) \Big]
+        \end{align}
+
+        Consider the vector $\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a$. If some component of it is odd, 
+        then there exist $2^{g-1}$ binary vectors ${\vec{\ep}}_1 \in \ZZ_2^g$ 
+        where the corresponding component is $1$, and the same number of vectors where 
+        the corresponding component is $0$. Those vectors produce 
+        terms that perfectly cancel each other.
+
+        So, every component of the vector $\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a$
+        must be even to give the non-zero result. 
+        And if so, by $2 \pi i$-periodicity of $\exp$, we can neglect 
+        the $(\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a)^t {\vec{\ep}}_1$ inside the $\exp(..)$.
+        The same applies for vector $\sum_{a=1}^6 \vec{n}_2^a + \vec{n}_{12}^a$.
+        
+        Thus, the outermost sum over all characteristics 
+        $e_1=\ch{{\vec{\de}}_1}{{\vec{\ep}}_1}, e_2=\ch{{\vec{\de}}_2}{{\vec{\ep}}_2}$ 
+        is reduced to the sum
+        over all binary vectors ${\vec{\de}}_1, {\vec{\de}}_2 \in \ZZ_2^g$ with coefficient $2^{2g}$
+        and we get:
+        
+         \begin{align}
+            \sum_{e_1, e_2} \theta^6_{e_1} \theta^6_{e_2} \theta^6_{e_1+e_2}
+            &= 2^{2g}\sum_{{\vec{\de}}_1, {\vec{\de}}_2 \in \ZZ_2^g} 
+            \sum_{\substack{
+                \vec{n}_1^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_2^a \in \ZZ^g \\ a=1..6}}
+            \sum_{\substack{\vec{n}_{12}^a \in \ZZ^g \\ a=1..6 \\
+                \forall k \quad (\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a)_k \vdots 2 \\ 
+                \forall k \quad (\sum_{a=1}^6 \vec{n}_2^a + \vec{n}_{12}^a)_k \vdots 2
+            }}
+            \exp \Big [ \pi i \Big (
+                \sum_{a=1}^6 (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1^a+\frac{{\vec{\de}}_1}{2}) \nonumber \\
+                &+ \sum_{a=1}^6 (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_2^a+\frac{{\vec{\de}}_1}{2}) + 
+                \sum_{a=1}^6 (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})^t \tau (\vec{n}_{12}^a+\frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})
+            \Big) \Big]
+        \end{align}
+
+        Now consider the lattice
+        \begin{align}
+            \Lambda = \{ 
+                (n_1^1, .., n_1^6, n_2^1, .., n_2^6, n_{12}^1, .., n_{12}^6) \in \ZZ^{12}
+                \big | \sum_{a=1}^6 n_1^a + n_{12}^a, \sum_{a=1}^6 n_2^a + n_{12}^a \quad \text{are even}
+            \}
+        \end{align}
+        (here every $n^i_j$ represents one of the $g$ components of the vector $\vec n^i_j \in \ZZ^g$).
+
+        The corresponding lattice theta series is:
+        \begin{align}
+            \vartheta^{(g)}_{\Lambda}(\tau) = \sum_{(\vec p_1, .., \vec p_g) \in \Lambda^g} 
+                \exp(\pi i \sum_{k,l} ({\vec{p_k}} \cdot {\vec{p_l}}) \tau_{kl})
+        \end{align}
+        
+        Let's consider the sum inside the $\exp(..)$:
+        \begin{align}
+            \sum_{k,l} ({\vec{p_k}} \cdot {\vec{p_l}}) \tau_{kl} 
+            &= \sum_{k, l} \tau_{kl} \Big ( 
+                \sum_{a=1}^6 n_1^a(k) \cdot n_1^a(l) +
+                \sum_{a=1}^6 n_2^a(k) \cdot n_2^a(l) +
+                \sum_{a=1}^6 n_{12}^a(k) \cdot n_{12}^a(l)
+            \Big) \nonumber \\
+            &= \sum_{a=1}^6 \sum_{k,l} n_1^a(k) \tau_{kl} n_1^a(l) + 
+            \sum_{a=1}^6 \sum_{k,l} n_2^a(k) \tau_{kl} n_2^a(l) + 
+            \sum_{a=1}^6 \sum_{k,l} n_{12}^a(k) \tau_{kl} n_{12}^a(l) \nonumber \\
+            &= \sum_{a=1}^6 (\vec n_1^a)^t \tau \vec n_1^a + (\vec n_2^a)^t \tau \vec n_2^a + (\vec n_{12}^a)^t \tau \vec n_{12}^a
+        \end{align}
+
+        So the $\vartheta^{(g)}_\Lambda$ is almost what we want:
+        \begin{align}
+            \vartheta^{(g)}_\Lambda(\tau) = 
+            \sum_{\substack{
+                \vec{n}_1^a, \vec{n}_2^a, \vec{n}_{12}^a \in \ZZ^g \\
+                a = 1..6 \\
+                \forall k \quad (\sum_{a=1}^6 \vec{n}_1^a + \vec{n}_{12}^a)_k \vdots 2 \\ 
+                \forall k \quad (\sum_{a=1}^6 \vec{n}_2^a + \vec{n}_{12}^a)_k \vdots 2
+            }} \exp \Big [ \pi i \Big(
+                \sum_{a=1}^6 (\vec{n}_1^a)^t \tau \vec{n}_1^a + 
+                \sum_{a=1}^6 (\vec{n}_2^a)^t \tau \vec{n}_2^a + 
+                \sum_{a=1}^6 (\vec{n}_{12}^a)^t \tau \vec{n}_{12}^a
+            \Big) \Big]
+        \end{align}
+
+        Now, by gluing $\Lambda$ with vectors $\vec{\alpha}, \vec{\beta}, \vec{\gamma}$ (defined below) we obtain
+        the lattice $\Lambda^+$:
+        \begin{align}
+            \Lambda^+ = 
+            \langle \Lambda , \vec \alpha, \vec \beta, \vec \gamma \rangle
+        \end{align}
+        where 
+        \begin{align}
+            \vec{\alpha}=\big(\frac{1}{2}^6, 0^6, \frac{1}{2}^6 \big) \\
+            \vec{\beta}=\big(0^6, \frac{1}{2}^6, \frac{1}{2}^6\big) \\
+            \vec{\gamma}=\big(\frac{1}{2}^6, \frac{1}{2}^6, 0^6\big)
+        \end{align}.
+
+        Let's calculate the theta series for $\Lambda^+$. 
+        If 
+        ${\vec{p_k}} \in (\Lambda + \vec{\alpha})$ and ${\vec{p_l}} \in \Lambda$, then
+        \begin{align}
+            ({\vec{p_k}} \cdot {\vec{p_l}}) &= 
+            \sum_{a=1}^6 (n_1^a(k) + \frac{1}{2}) \cdot (n_1^a(l) + \frac{1}{2}) \nonumber \\
+            &+\sum_{a=1}^6 n_2^a(k) \cdot n_2^a(l) \nonumber \\
+            &+\sum_{a=1}^6 (n_{12}^a(k) + \frac{1}{2}) \cdot (n_{12}^a(l) + \frac{1}{2})
+        \end{align}
+        If ${\vec{p_k}} \in (\Lambda + \vec{\alpha})$ and ${\vec{p_l}} \in (\Lambda + \vec{\beta})$, then
+        \begin{align}
+            ({\vec{p_k}} \cdot {\vec{p_l}}) &=
+            \sum_{a=1}^6 (n_1^a(k) + \frac{1}{2}) \cdot (n_1^a(l) + \frac{1}{2}) \nonumber \\
+            &+ \sum_{a=1}^6 (n_2^a(k) + \frac{1}{2}) \cdot (n_2^a(l) + \frac{1}{2}) \nonumber \\
+            &+ \sum_{a=1}^6 (n_{12}^a(k) + \frac{1}{2} + \frac{1}{2}) 
+                \cdot (n_{12}^a(l) + \frac{1}{2} + \frac{1}{2})
+        \end{align}
+        And the same for all other cases. The point is, if we fix the vectors
+        $(\vec p_1, .., \vec p_g) \in (\Lambda^+)^g$ and construct the matrix where they represent rows, then
+        we can consider
+        $\vec{n}_1^1, .., \vec{n}_1^6, \vec{n}_2^1, .., \vec{n}_2^6, \vec{n}_{12}^1, .., \vec{n}_{12}^6$ as columns of this matrix
+        (see the definition of $\Lambda$).
+        For example, when ${\vec{p_k}} \in (\Lambda + \vec{\alpha})$, we get the $k$-th component of each vector
+        $\vec{n}_1^1, .., \vec{n}_1^6, \vec{n}_{12}^1, .., \vec{n}_{12}^6$ shifted by $1/2$ 
+        (at the same time $k$-th component of $\vec{n}_2^1, .., \vec{n}_2^6$ is not shifted).
+        
+        Now, we can view the $\sum_{k, l} ({\vec{p_k}} \cdot {\vec{p_l}}) \tau_{kl}$,
+        as the sum "over rows" of our matrix. 
+        The corresponding sum "over columns" could be written as:
+        \begin{align}
+            \sum_{{\vec{\de}}_1, {\vec{\de}}_2} \Big(
+                \sum_{a=1}^6 (\vec{n}_1^a + \frac{{\vec{\de}}_1}{2})^t \tau (\vec{n}_1^a + \frac{{\vec{\de}}_1}{2})
+                &+ \sum_{a=1}^6 (\vec{n}_2^a + \frac{{\vec{\de}}_2}{2})^t \tau (\vec{n}_2^a + \frac{{\vec{\de}}_2}{2}) \nonumber \\
+                &+ \sum_{a=1}^6 (\vec{n}_1^a + \frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})^t \tau 
+                    (\vec{n}_1^a + \frac{{\vec{\de}}_1 + {\vec{\de}}_2}{2})
+            \Big)
+        \end{align}
+        where if we denote $k$-th row of our matrix by ${\vec{p_k}}$, then
+        $({\vec{\de}}_1)_k=0, ({\vec{\de}}_2)_k=0$ means ${\vec{p_k}} \in \Lambda$;
+        $({\vec{\de}}_1)_k=1, ({\vec{\de}}_2)_k=0$ means ${\vec{p_k}} \in (\Lambda + \vec{\alpha})$;
+        $({\vec{\de}}_1)_k=0, ({\vec{\de}}_2)_k=1$ means ${\vec{p_k}} \in (\Lambda + \vec{\beta})$; 
+        $({\vec{\de}}_1)_k=1, ({\vec{\de}}_2)_k=1$ means ${\vec{p_k}} \in (\Lambda + \vec{\gamma})$. \Big($({\vec{\de}}_1 + {\vec{\de}}_2)$ is the sum modulo 2\Big).
+    \end{proof}
+
+    \begin{lemma}
+        The lattice $\Lambda^+=\langle \Lambda, \alpha, \beta, \gamma \rangle$ is the lattice
+        \begin{align}
+        \Lambda^+ = \Lambda \cup (\Lambda + \vec{\alpha}) \cup (\Lambda + \vec{\beta}) \cup (\Lambda + \vec{\gamma})
+    \end{align}
+    where 
+    \begin{align}
+        \Lambda &= \{ 
+            (n_1^1, .., n_1^6, n_2^1, .., n_2^6, n_{12}^1, .., n_{12}^6) \in \ZZ^{12}
+            \big | \sum_{a=1}^6 n_1^a + n_{12}^a, \sum_{a=1}^6 n_2^a + n_{12}^a \quad \text{are even}
+        \} \\
+        \vec{\alpha}&=\big(\frac{1}{2}^6, 0^6, \frac{1}{2}^6 \big) \\
+        \vec{\beta}&=\big(0^6, \frac{1}{2}^6, \frac{1}{2}^6\big) \\
+        \vec{\gamma}&=\big(\frac{1}{2}^6, \frac{1}{2}^6, 0^6\big) \\\
+    \end{align}
+    \begin{proof}
+        Every vector in $\langle \Lambda, \vec \alpha, \vec \beta, \vec \de \rangle$
+        can be expressed as 
+        \begin{align}
+            x \vec v + a \vec\alpha + b \vec\beta + c \vec\gamma
+        \end{align}
+        where $x, a, b, c \in \ZZ$. If all or neither of the $a, b, c$ are odd, 
+        then the resulting vector
+        lies in $\alpha$. If $a, b$ are odd and $c$ is even, then the resulting vector
+        lies in $\Lambda + \gamma$. The cases where $b, c$ are odd, $a$ is even and $a, c$ are odd, 
+        $b$ is even are analogous.
+        If $a$ is odd, and $b, c$ are even, then the resulting vector lies in $\Lambda + \alpha$. 
+        The same for case when only $b$ or $c$ is odd.
+    \end{proof}
+    
+    \end{lemma}
+
+    \begin{lemma}
+    The lattice $\Lambda^+$ is equal to the lattice obtained by
+    gluing $D_6^3=D_6 \oplus D_6 \oplus D_6$ with vectors $\vec{\alpha}$, $\vec{\beta}$, ${\vec{\de}}$, where 
+    \begin{align}
+        {\vec{\de}}&=\big(1,0^5, 1,0^5,1,0^5\big)
+    \end{align}
+    \end{lemma}
+
+    \begin{proof}
+        The lattice $\Lambda$ could be viewed as the sublattice of $\ZZ^{18}$ containing all
+        the vectors of type $(e, e, e) \in \ZZ^{18}$ 
+        and $(o, o, o) \in \ZZ^{18}$ where each $e \in \ZZ^6$ denotes the
+        vector with even sum of components and each $o \in \ZZ^6$ denotes the vector with odd sum
+        of components.
+
+        The sublattice of $\Lambda$ which contains $(e, e, e)$ is precisely
+        $D_6^3$. Let's show that 
+        $D_6^3$ glued with $\vec{\alpha}, \vec{\beta}, {\vec{\de}}$ is 
+        exactly $\Lambda^+$.
+
+        Firstly, consider the lattice $D_6^3$ glued with ${\vec{\de}}$. It is easy to see
+        that we obtain the lattice $\Lambda$: every vector of type $(e, e, e)$ is 
+        by definition in $D_6^3$, and every vector of type $(o, o, o)$ could be obtained from
+        the suitable vector of type $(e, e, e)$ by adding ${\vec{\de}}$.
+
+        Now, glue the result with $\vec{\alpha}, \vec{\beta}$. It only remains to show that $\vec{\gamma}$
+        is also generated:
+        $$
+        \vec{\alpha} + \vec{\beta} - \vec{\gamma}=(0^6, 0^6, 1^6)
+        $$
+        and since the $(0^6, 0^6, 1^6)$ is inside the lattice $\Lambda$ (as vector of type $(e, e, e)$)
+        then the vector $\vec{\gamma}$ is inside the lattice $\Lambda$ as well.
+    \end{proof}
+
+    \begin{lemma}
+        $\Lambda^+$ is unimodular.
+    \end{lemma}
+
+    \begin{proof}
+        Let's construct the generating matrix $M$ for the lattice $\Lambda$ and see that 
+        $\det MM^t=1$.
+
+        It is known \cite{conway} that vectors
+        \begin{align} 
+            (-1, -1, 0, 0, 0, 0)    \nonumber \\
+            (1, -1, 0, 0, 0, 0)     \nonumber \\
+            (0, 1, -1, 0, 0, 0)     \nonumber \\
+            (0, 0, 1, -1, 0, 0)     \nonumber \\
+            (0, 0, 0, 1, -1, 0)     \nonumber \\
+            (0, 0, 0, 0, 1, -1)
+        \end{align}
+        form the generating basis of $D_6$.
+        Consider the basis of $D_6^3$:
+        \begin{align}
+            e^1_1&=(-1, -1, 0, 0, 0, 0, 0^6, 0^6)    \nonumber \\
+            e^1_2&=(1, -1, 0, 0, 0, 0, 0^6, 0^6)     \nonumber \\
+            e^1_3&=(0, 1, -1, 0, 0, 0, 0^6, 0^6)     \nonumber \\
+            e^1_4&=(0, 0, 1, -1, 0, 0, 0^6, 0^6)     \nonumber \\
+            e^1_5&=(0, 0, 0, 1, -1, 0, 0^6, 0^6)     \nonumber \\
+            e^1_6&=(0, 0, 0, 0, 1, -1, 0^6, 0^6)     \nonumber \\
+            e^2_1&=(0^6, -1, -1, 0, 0, 0, 0, 0^6)    \nonumber \\
+            e^2_2&=(0^6, 1, -1, 0, 0, 0, 0, 0^6)     \nonumber \\
+            e^2_3&=(0^6, 0, 1, -1, 0, 0, 0, 0^6)     \nonumber \\
+            e^2_4&=(0^6, 0, 0, 1, -1, 0, 0, 0^6)     \nonumber \\
+            e^2_5&=(0^6, 0, 0, 0, 1, -1, 0, 0^6)     \nonumber \\
+            e^2_6&=(0^6, 0, 0, 0, 0, 1, -1, 0^6)     \nonumber \\
+            e^3_1&=(0^6, 0^6, -1, -1, 0, 0, 0, 0)    \nonumber \\
+            e^3_2&=(0^6, 0^6, 1, -1, 0, 0, 0, 0)     \nonumber \\
+            e^3_3&=(0^6, 0^6, 0, 1, -1, 0, 0, 0)     \nonumber \\
+            e^3_4&=(0^6, 0^6, 0, 0, 1, -1, 0, 0)     \nonumber \\
+            e^3_5&=(0^6, 0^6, 0, 0, 0, 1, -1, 0)     \nonumber \\
+            e^3_6&=(0^6, 0^6, 0, 0, 0, 0, 1, -1)     \nonumber \\
+        \end{align}
+        Replace the vector $e^1_2$ with ${\vec{\de}}$, $e^2_5$ with $\vec{\beta}$ and $e^3_5$ with $\vec{\alpha}$.
+        It is easy to see that we still generate $D_6^3$:
+        \begin{align}
+            e^1_2&=e^1_1 + 2{\vec{\de}} + e^2_1 - e^2_2 + e^3_1 - e^3_2 \\
+            e^2_5&=-5e^1_1 - 4{\vec{\de}} - 4e^1_3 - 3e^1_4 - 2e^1_5 - e^1_6 - 2e^2_1 + 2e^2_2 - 5e^3_1 - 0 - 4e^3_3 - 3e^3_4 - 2e^3_5 - 2e^3_6 \\
+            e^3_5&=5e^1_1 + 4e^1_2 + 4e^1_3 + 3e^1_4 + 2e^1_5 + 1e^1_6 - 1e^2_1 - 4e^2_2 - 4e^2_3 - 3e^2_4 - 2e^2_5 - 2e^2_6 + 2e^3_1 - 2e^3_2 + 2e^3_6
+        \end{align}
+        Thus, the matrix $M^t$ constructed with this basis as rows:
+        \begin{align}
+    M^t = 
+    \begin{bmatrix}{}
+        -1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 \\
+    \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2}
+    \end{bmatrix} 
+    \end{align}
+
+    is the generating matrix for $\Lambda^+$. One can verify that $\det MM^t=1$.
+    
+    \end{proof}
+
+    \begin{theorem}[\cite{conway}, Classification of unimodular lattices]
+        All the unimodular lattices in dimension $m < 24$ which does not contain vectors 
+        of unit norm are listed in \cite[Section~16.4, Table~16.7]{conway}.
+    \end{theorem}
+
+    \begin{theorem}\label{thm:classification-of-lambda}
+        $\Lambda^+$ is the 3rd out of 4 18-dimensional unimodular lattices
+        provided in classification 
+        table in \cite[Section~16.4, Table~16.7]{conway}.
+
+        Thus \begin{align}\label{eq:U183}
+        \forall g \in\mathbb{Z}_{\geq 0} \quad  \xi^{12,(g)}_2 [0] = 2^{-2g}\, \vartheta^{(g)}_{Z^6\oplus U_{18,3}}
+        \end{align}
+        where  $U_{18,3}$ is the third 18-dimensional lattice in Conway's classification, and $\vartheta^{(g)}_{\ZZ^6\oplus U_{18,3}}$ is the respective theta series for the direct sum of lattices.
+    \end{theorem}
+    \begin{proof}
+        It is easy to see that our lattice $\Lambda^+$ does not contain vectors of unit norm. All the 
+        vectors of form $v + \vec{\alpha}, v + \vec{\beta}, v + \vec{\gamma}$ where $v \in \Lambda$ 
+        has norm which is at least $3/2+3/2=3$. 
+        Vectors of type $(e, e, e) \in \Lambda$ has norm at least 2,
+        and vectors of type $(o, o, o) \in \Lambda$ has norm at least 3.
+
+        And since the unimodularity of $\Lambda^+$ we can conclude that our lattice is presented
+        in table in \cite[Section~16.4, Table~16.7]{conway}. 
+        There are 4 lattices of dimension 18 there. 
+        They are defined by sublattices: $A_{17}\oplus A_1$, $D_{10} \oplus E_7 \oplus A_1$,
+        $D_6^3$, and $A_9^2$. Clearly, our lattice is the one containing the sublattice $D_6^3$.
+
+        Formula \eqref{eq:U183} follows from theorem \ref{thm:p-2} and the above.
+    \end{proof}
+    
+    
+
+    The problem of finding the underlying lattice for the
+    last case of $p=3$ (polynomial $\xi_3^{12, (g)}$)
+    requires another approach because powers of $\theta$ are no longer even (see the proof of 
+    theorem \ref{thm:p-2}).
+    So, this question remains open.
+\section{References}
+\printbibliography
+
+\end{document}
